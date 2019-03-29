@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: task1-deployment
+ labels:
+  app: tomcat
+spec:
+ replicas: 3
+ strategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 2
+    maxUnavailable: 0
+ selector:
+  matchLabels:
+   app: tomcat
+ template:
+  metadata:
+   labels:
+    app: tomcat
+  spec:
+   containers:
+   - name: tom
+     image: manya97/manya_tomcat:0.1
+     ports:
+     - containerPort: 80
